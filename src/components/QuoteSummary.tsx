@@ -4,7 +4,6 @@ import { useState } from "react";
 import { ClientInfo, PricingResult, CATEGORIES } from "@/types";
 import { getSolution } from "@/lib/solutions";
 import {
-  Download,
   Loader2,
   FileSpreadsheet,
   Check,

@@ -121,7 +121,6 @@ export default function PricingPortal() {
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <div className="flex min-w-0">
             {STEPS.map((s, i) => {
-              const Icon = s.icon;
               const isActive = i === step;
               const isComplete = i < step;
               return (

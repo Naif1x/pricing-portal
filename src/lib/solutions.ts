@@ -847,8 +847,6 @@ const basherHR: SolutionDef = {
     const basePerHundred = 37500;
     const additionalPerEmp = 89.55;
     const baseCost = basePerHundred + selfServicePerHundred;
-    const additionalCost = Math.max(0, emps - 100) * additionalPerEmp;
-    const totalLicense = baseCost + additionalCost;
     return result([
       li("Basher HR Base License (100 employees)", 1, baseCost, 0, "license"),
       ...(emps > 100 ? [li("Additional Employees", emps - 100, additionalPerEmp, 0, "license")] : []),

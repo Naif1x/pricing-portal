@@ -3,7 +3,7 @@ export interface InputField {
   label: string;
   type: "number" | "select" | "checkbox-group" | "toggle";
   options?: { label: string; value: string; price?: number }[];
-  defaultValue?: number | string | string[] | boolean;
+  defaultValue?: number | string | string[] | boolean | Record<string, number>;
   min?: number;
   max?: number;
   step?: number;
