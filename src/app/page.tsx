@@ -88,23 +88,23 @@ export default function PricingPortal() {
   return (
     <div className="min-h-screen bg-surface">
       {/* Header */}
-      <header className="border-b border-border bg-white shadow-sm">
+      <header className="border-b border-border bg-primary-dark shadow-sm">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6 sm:py-4">
           <div className="flex items-center gap-3">
             <img src="/logo.png" alt="Trustangle" className="h-9 w-auto" />
             <div className="hidden sm:block">
-              <h1 className="text-lg font-bold text-text">
+              <h1 className="text-lg font-bold text-white">
                 Pricing Portal
               </h1>
-              <p className="text-xs text-text-secondary">
+              <p className="text-xs text-white/70">
                 Sales Quote Generator
               </p>
             </div>
           </div>
           {selectedSolutions.length > 0 && step >= 2 && (
             <div className="text-right">
-              <p className="text-xs text-text-secondary">Grand Total</p>
-              <p className="text-lg font-bold text-primary">
+              <p className="text-xs text-white/70">Grand Total</p>
+              <p className="text-lg font-bold text-accent">
                 SAR{" "}
                 {grandTotal.toLocaleString("en-US", {
                   minimumFractionDigits: 2,
