@@ -33,7 +33,11 @@ function in30Days() {
 }
 
 export default function PricingPortal() {
-  const [step, setStep] = useState(0);
+  const [step, setStepRaw] = useState(0);
+  const setStep = (s: number) => {
+    setStepRaw(s);
+    window.scrollTo({ top: 0, behavior: "instant" });
+  };
 
   const [client, setClient] = useState<ClientInfo>({
     companyName: "",
@@ -41,7 +45,7 @@ export default function PricingPortal() {
     email: "",
     phone: "",
     date: today(),
-    validUntil: in30Days(),
+    validityDays: 30,
     notes: "",
   });
 
@@ -70,7 +74,7 @@ export default function PricingPortal() {
   const canProceed = () => {
     switch (step) {
       case 0:
-        return client.companyName.trim() !== "" && client.contactName.trim() !== "";
+        return client.companyName.trim() !== "" && client.contactName.trim() !== "" && client.validityDays >= 1 && client.validityDays <= 60;
       case 1:
         return selectedSolutions.length > 0;
       case 2:

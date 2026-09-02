@@ -47,7 +47,7 @@ export interface ClientInfo {
   email: string;
   phone: string;
   date: string;
-  validUntil: string;
+  validityDays: number;
   notes: string;
 }
 
@@ -66,18 +66,11 @@ export interface Quote {
 
 export const CATEGORIES = [
   { id: "erp", label: "ERP", icon: "Database" },
-  { id: "pos", label: "POS", icon: "Monitor" },
-  { id: "hr", label: "HR", icon: "Users" },
-  { id: "crm", label: "CRM & Loyalty", icon: "Heart" },
-  { id: "digital", label: "Digital & Apps", icon: "Smartphone" },
-  { id: "operations", label: "Operations", icon: "Boxes" },
-  { id: "hospitality", label: "Hospitality", icon: "Hotel" },
+  { id: "instorecx", label: "InstoreCX", icon: "Monitor" },
+  { id: "field-automation", label: "Field Automation", icon: "Boxes" },
+  { id: "digital", label: "Digital Omnichannel", icon: "Smartphone" },
+  { id: "data-ai", label: "Data & AI", icon: "Brain" },
   { id: "integration", label: "Integration", icon: "Link" },
-  { id: "contact-center", label: "Contact Center", icon: "Headphones" },
-  { id: "task-mgmt", label: "Task Management", icon: "ClipboardList" },
-  { id: "aggregator", label: "Aggregators", icon: "GitMerge" },
-  { id: "hardware", label: "Hardware", icon: "Cpu" },
-  { id: "websites", label: "Websites", icon: "Globe" },
 ] as const;
 
 export const SAR_USD_RATE = 3.75;

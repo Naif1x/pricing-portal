@@ -50,6 +50,8 @@ function NumberInput({
   suffix?: string;
 }) {
   const s = step || 1;
+  const [display, setDisplay] = useState(String(value));
+  useEffect(() => { setDisplay(String(value)); }, [value]);
   const clamp = (v: number) => {
     if (min !== undefined && v < min) return min;
     if (max !== undefined && v > max) return max;
@@ -67,8 +69,13 @@ function NumberInput({
         </button>
         <input
           type="number"
-          value={value}
-          onChange={(e) => onChange(clamp(Number(e.target.value) || 0))}
+          value={display}
+          onChange={(e) => {
+            setDisplay(e.target.value);
+            const num = Number(e.target.value);
+            if (!isNaN(num)) onChange(clamp(num));
+          }}
+          onBlur={() => setDisplay(String(value))}
           min={min}
           max={max}
           step={s}
@@ -435,12 +442,57 @@ export default function SolutionConfigurator({
     }
   }, [solutionIds, configurations, onConfigChange, recalculate]);
 
+  const HR_SOLUTION_IDS = ["bayzat-hr", "kayan-hr", "basher-hr"];
+
   const handleValuesChange = (
     solId: string,
     values: Record<string, unknown>
   ) => {
     onConfigChange(solId, values);
     recalculate(solId, values);
+
+    // Auto-set ERP <> HR quantity in Reachware Connect based on employee count
+    const getEmployeeCount = (overrideSolId?: string, overrideValues?: Record<string, unknown>) => {
+      for (const hrId of HR_SOLUTION_IDS) {
+        if (!solutionIds.includes(hrId)) continue;
+        const cfg = hrId === overrideSolId ? overrideValues : configurations[hrId];
+        if (cfg && Number(cfg.employees) > 0) return Number(cfg.employees);
+      }
+      return 0;
+    };
+
+    if (HR_SOLUTION_IDS.includes(solId) && solutionIds.includes("rw-connect")) {
+      const employees = Number(values.employees) || 0;
+      if (employees > 0) {
+        const rwConfig = configurations["rw-connect"];
+        if (rwConfig) {
+          const modules = (rwConfig.modules as Record<string, number>) || {};
+          if (modules["erp-hr"] !== undefined) {
+            const neededQty = Math.ceil(employees / 20);
+            if (modules["erp-hr"] !== neededQty) {
+              const updatedConfig = { ...rwConfig, modules: { ...modules, "erp-hr": neededQty } };
+              onConfigChange("rw-connect", updatedConfig);
+              recalculate("rw-connect", updatedConfig);
+            }
+          }
+        }
+      }
+    }
+
+    if (solId === "rw-connect") {
+      const modules = (values.modules as Record<string, number>) || {};
+      if (modules["erp-hr"] !== undefined) {
+        const employees = getEmployeeCount();
+        if (employees > 0) {
+          const neededQty = Math.ceil(employees / 20);
+          if (modules["erp-hr"] !== neededQty) {
+            const updatedConfig = { ...values, modules: { ...modules, "erp-hr": neededQty } };
+            onConfigChange("rw-connect", updatedConfig);
+            recalculate("rw-connect", updatedConfig);
+          }
+        }
+      }
+    }
   };
 
   return (

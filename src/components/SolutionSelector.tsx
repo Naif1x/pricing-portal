@@ -6,24 +6,16 @@ import { CATEGORIES } from "@/types";
 import {
   Database,
   Monitor,
-  Users,
-  Heart,
   Smartphone,
   Boxes,
-  Hotel,
   Link,
-  Headphones,
-  ClipboardList,
-  GitMerge,
-  Cpu,
-  Globe,
+  Brain,
   Check,
   Search,
 } from "lucide-react";
 
 const ICONS: Record<string, React.ElementType> = {
-  Database, Monitor, Users, Heart, Smartphone, Boxes,
-  Hotel, Link, Headphones, ClipboardList, GitMerge, Cpu, Globe,
+  Database, Monitor, Smartphone, Boxes, Link, Brain,
 };
 
 interface Props {

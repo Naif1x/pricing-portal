@@ -87,15 +87,18 @@ export default function QuoteSummary({
         throw new Error(errData?.error || `Server error: ${res.status}`);
       }
 
-      const blob = await res.blob();
+      const html = await res.text();
+      const blob = new Blob([html], { type: "text/html" });
       const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `Trustangle_Quote_${client.companyName.replace(/\s+/g, "_")}_${new Date().toISOString().slice(0, 10)}.xlsx`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
+      const win = window.open(url, "_blank");
+      if (win) {
+        win.addEventListener("load", () => {
+          setTimeout(() => {
+            win.print();
+            URL.revokeObjectURL(url);
+          }, 600);
+        });
+      }
       setSuccess(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to generate quote");
@@ -109,7 +112,7 @@ export default function QuoteSummary({
       <div>
         <h2 className="text-xl font-semibold text-text">Quote Summary</h2>
         <p className="mt-1 text-sm text-text-secondary">
-          Review the complete quote before generating the Excel file.
+          Review the complete quote before generating the PDF.
         </p>
       </div>
 
@@ -132,8 +135,8 @@ export default function QuoteSummary({
             <span className="font-medium">{client.date || "—"}</span>
           </div>
           <div>
-            <span className="text-text-secondary">Valid Until: </span>
-            <span className="font-medium">{client.validUntil || "—"}</span>
+            <span className="text-text-secondary">Validity: </span>
+            <span className="font-medium">{client.validityDays} calendar days from date of issue</span>
           </div>
         </div>
       </div>
@@ -225,7 +228,7 @@ export default function QuoteSummary({
           ) : (
             <>
               <FileSpreadsheet className="h-4 w-4" />
-              Generate Excel Quote
+              Generate Quote
             </>
           )}
         </button>

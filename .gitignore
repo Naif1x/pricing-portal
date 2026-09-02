@@ -37,3 +37,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+.vercel
+
+# utility scripts
+_extract-omniful.js
+_extract-pricing.js
+/scripts/
+/templates/

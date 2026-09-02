@@ -23,7 +23,7 @@ function implLine(
   label = "Implementation"
 ): LineItem {
   return li(
-    `${label} (${manDays} man-days)`,
+    label,
     manDays,
     IMPLEMENTATION_DAY_RATE,
     discount,
@@ -91,7 +91,7 @@ const netsuite: SolutionDef = {
         { label: "FinancialsFirst Standard ($1,899/mo)", value: "standard" },
         { label: "FinancialsFirst Premium ($3,999/mo)", value: "premium" },
       ],
-      defaultValue: "premium",
+      defaultValue: "standard",
     },
     {
       id: "users",
@@ -231,7 +231,7 @@ const netsuite: SolutionDef = {
     };
 
     const baseDays = NS_IMPL_DAYS.base[sizeTier];
-    items.push(implLine(baseDays, implDisc, `SuiteSuccess Base Implementation (${sizeTier})`));
+    items.push(implLine(baseDays, implDisc, `SuiteSuccess Base Implementation`));
 
     for (const modId of selectedModules) {
       const mod = NS_MODULES.find((m) => m.value === modId);
@@ -244,7 +244,6 @@ const netsuite: SolutionDef = {
     return result(items, [
       "Prices in SAR. USD converted at 3.75 rate.",
       "Annual license shown (commitment spread).",
-      `Size tier: ${sizeTier} (${users} users). Implementation days from delivery timeline.`,
     ]);
   },
 };
@@ -314,7 +313,7 @@ const REVEL_HW = [
 const revel: SolutionDef = {
   id: "revel",
   name: "Revel POS",
-  category: "pos",
+  category: "instorecx",
   description: "Cloud-based iPad POS for restaurants and retail",
   solutionType: "POS",
   inputs: [
@@ -402,7 +401,7 @@ const revel: SolutionDef = {
 const lightspeed: SolutionDef = {
   id: "lightspeed",
   name: "Lightspeed X Series",
-  category: "pos",
+  category: "instorecx",
   description: "Cloud POS for retail and hospitality",
   solutionType: "POS",
   inputs: [
@@ -449,7 +448,7 @@ const TCS_ADDONS = [
 const tcs: SolutionDef = {
   id: "tcs",
   name: "TCS POS",
-  category: "pos",
+  category: "instorecx",
   description: "True Cloud Solution point-of-sale system",
   solutionType: "POS",
   inputs: [
@@ -501,7 +500,7 @@ const tcs: SolutionDef = {
 const dingg: SolutionDef = {
   id: "dingg",
   name: "Dingg",
-  category: "pos",
+  category: "instorecx",
   description: "Salon & spa management POS system",
   solutionType: "POS",
   inputs: [
@@ -539,7 +538,7 @@ const dingg: SolutionDef = {
 const miosalon: SolutionDef = {
   id: "miosalon",
   name: "Miosalon",
-  category: "pos",
+  category: "instorecx",
   description: "Salon management and POS solution",
   solutionType: "POS",
   inputs: [
@@ -571,7 +570,7 @@ const INFRASYS_ITEMS = [
 const infrasys: SolutionDef = {
   id: "infrasys",
   name: "Infrasys POS",
-  category: "pos",
+  category: "instorecx",
   description: "Cloud POS for hotels and restaurants (Shiji Group)",
   solutionType: "POS",
   inputs: [
@@ -617,7 +616,7 @@ const infrasys: SolutionDef = {
 const como: SolutionDef = {
   id: "como",
   name: "COMO",
-  category: "crm",
+  category: "instorecx",
   description: "AI-powered CRM and loyalty platform",
   solutionType: "AI CRM",
   inputs: [
@@ -653,7 +652,7 @@ const JOLT_MODULES = [
 const jolt: SolutionDef = {
   id: "jolt",
   name: "Jolt",
-  category: "task-mgmt",
+  category: "field-automation",
   description: "Digital task management and compliance for operations",
   solutionType: "Task Management",
   inputs: [
@@ -689,9 +688,9 @@ const jolt: SolutionDef = {
 const servme: SolutionDef = {
   id: "servme",
   name: "SerVme",
-  category: "crm",
+  category: "instorecx",
   description: "Restaurant reservation, CRM, and guest management",
-  solutionType: "Reservation & CRM",
+  solutionType: "Reservation System",
   inputs: [
     {
       id: "tier",
@@ -727,7 +726,7 @@ const servme: SolutionDef = {
 const lynnc: SolutionDef = {
   id: "lynnc",
   name: "Lynnc",
-  category: "aggregator",
+  category: "instorecx",
   description: "Delivery aggregator integration platform",
   solutionType: "Aggregators",
   inputs: [
@@ -767,7 +766,7 @@ const lynnc: SolutionDef = {
 const bayzatHR: SolutionDef = {
   id: "bayzat-hr",
   name: "Bayzat HR",
-  category: "hr",
+  category: "erp",
   description: "HR, payroll, and insurance management platform",
   solutionType: "HR",
   inputs: [
@@ -794,7 +793,7 @@ const bayzatHR: SolutionDef = {
 const kayanHR: SolutionDef = {
   id: "kayan-hr",
   name: "Kayan HR",
-  category: "hr",
+  category: "erp",
   description: "Comprehensive HR management system",
   solutionType: "HR",
   inputs: [
@@ -831,7 +830,7 @@ const kayanHR: SolutionDef = {
 const basherHR: SolutionDef = {
   id: "basher-hr",
   name: "Basher HR",
-  category: "hr",
+  category: "erp",
   description: "Cloud-based HR and payroll system",
   solutionType: "HR",
   inputs: [
@@ -865,7 +864,7 @@ const OMNIFUL_ADDONS = [
 const omniful: SolutionDef = {
   id: "omniful",
   name: "Omniful",
-  category: "operations",
+  category: "field-automation",
   description: "Order, warehouse, and transportation management",
   solutionType: "Order and Warehouse Management",
   inputs: [
@@ -942,7 +941,7 @@ const omniful: SolutionDef = {
 const unleashed: SolutionDef = {
   id: "unleashed",
   name: "Unleashed",
-  category: "operations",
+  category: "field-automation",
   description: "Inventory management for growing businesses",
   solutionType: "Inventory Management",
   inputs: [
@@ -985,7 +984,7 @@ const unleashed: SolutionDef = {
 const onfleet: SolutionDef = {
   id: "onfleet",
   name: "Onfleet",
-  category: "operations",
+  category: "field-automation",
   description: "Last-mile delivery management platform",
   solutionType: "Fleet Management",
   inputs: [
@@ -1021,7 +1020,7 @@ const onfleet: SolutionDef = {
 const fiix: SolutionDef = {
   id: "fiix",
   name: "Fiix",
-  category: "operations",
+  category: "field-automation",
   description: "CMMS for maintenance management",
   solutionType: "Maintenance Management",
   inputs: [
@@ -1056,88 +1055,44 @@ const fiix: SolutionDef = {
 };
 
 // ─── Jigsaw ─────────────────────────────────────────────────
-const JIGSAW_ITEMS = [
-  { label: "Mobile Ordering App (per location)", value: "mobile-app", price: 0 },
-  { label: "Web Ordering (per location)", value: "web-ordering", price: 0 },
-  { label: "Kiosk App (per location)", value: "kiosk", price: 0 },
-  { label: "Order Subscription (per location)", value: "order-sub", price: 0 },
-  { label: "Reservation/Booking (per location)", value: "reservation", price: 0 },
-  { label: "Self-Services Ordering", value: "self-service", price: 0 },
-  { label: "Loyalty (per location)", value: "loyalty", price: 0 },
-  { label: "Scan to Order (per location)", value: "scan-order", price: 0 },
-  { label: "Scan to Pay (per location)", value: "scan-pay", price: 0 },
-  { label: "Dine (per location)", value: "dine", price: 4500 },
-  { label: "QR Digital Ordering (per location)", value: "qr-ordering", price: 12375 },
-  { label: "Wallet", value: "wallet", price: 2500 },
-  { label: "Website Hosting", value: "website", price: 24500 },
-];
-
-const JIGSAW_TIER_PRICES: Record<string, Record<string, number>> = {
-  "1-3": { "mobile-app": 9000, "web-ordering": 4500, "kiosk": 13500, "order-sub": 6750, "reservation": 3375, "self-service": 3375, "loyalty": 2250, "scan-order": 900, "scan-pay": 900 },
-  "4-10": { "mobile-app": 6750, "web-ordering": 3375, "kiosk": 11250, "order-sub": 5625, "reservation": 3375, "self-service": 3375, "loyalty": 1800, "scan-order": 900, "scan-pay": 900 },
-  "11-20": { "mobile-app": 4500, "web-ordering": 2250, "kiosk": 9000, "order-sub": 4500, "reservation": 2250, "self-service": 2250, "loyalty": 1350, "scan-order": 900, "scan-pay": 900 },
-  "21-50": { "mobile-app": 3375, "web-ordering": 1125, "kiosk": 6750, "order-sub": 3375, "reservation": 1125, "self-service": 1125, "loyalty": 900, "scan-order": 900, "scan-pay": 900 },
-  "51+": { "mobile-app": 2250, "web-ordering": 675, "kiosk": 4500, "order-sub": 2250, "reservation": 675, "self-service": 675, "loyalty": 450, "scan-order": 450, "scan-pay": 450 },
-};
-
 const jigsaw: SolutionDef = {
   id: "jigsaw",
   name: "Jigsaw",
   category: "digital",
-  description: "Mobile/web ordering, loyalty, and digital engagement platform",
+  description: "Mobile app and web app ordering platform",
   solutionType: "Mobile/Web App",
   inputs: [
-    {
-      id: "tier",
-      label: "Location Tier",
-      type: "select",
-      options: [
-        { label: "1-3 Locations", value: "1-3" },
-        { label: "4-10 Locations", value: "4-10" },
-        { label: "11-20 Locations", value: "11-20" },
-        { label: "21-50 Locations", value: "21-50" },
-        { label: "51+ Locations", value: "51+" },
-      ],
-      defaultValue: "1-3",
-    },
-    { id: "locations", label: "Number of Locations", type: "number", defaultValue: 1, min: 1, max: 200 },
-    {
-      id: "items",
-      label: "Products",
-      type: "checkbox-group",
-      options: JIGSAW_ITEMS.map((i) => ({ label: i.label, value: i.value })),
-      defaultValue: ["mobile-app"],
-    },
-    { id: "licenseDiscount", label: "License Discount (%)", type: "number", defaultValue: 25, min: 0, max: 50, suffix: "%" },
-    { id: "implDays", label: "Implementation Man-Days", type: "number", defaultValue: 15, min: 5, max: 50, helpText: "Prebuilt: 10-20 days, Custom: 25-50 days depending on product" },
-    { id: "implDiscount", label: "Implementation Discount (%)", type: "number", defaultValue: 20, min: 0, max: 60, suffix: "%" },
+    { id: "brands", label: "Number of Brands", type: "number", defaultValue: 1, min: 1, max: 20 },
+    { id: "branchesPerBrand", label: "Branches per Brand", type: "number", defaultValue: 1, min: 1, max: 200 },
+    { id: "includeApp", label: "Include Mobile App", type: "toggle", defaultValue: true },
+    { id: "includeWeb", label: "Include Web App", type: "toggle", defaultValue: true },
+    { id: "licenseDiscount", label: "License Discount (%)", type: "number", defaultValue: 0, min: 0, max: 50, suffix: "%" },
+    { id: "implDiscount", label: "Implementation Discount (%)", type: "number", defaultValue: 0, min: 0, max: 60, suffix: "%" },
   ],
   calculate(v) {
-    const tier = v.tier as string;
-    const locs = Number(v.locations) || 1;
+    const brands = Number(v.brands) || 1;
+    const branchesPerBrand = Number(v.branchesPerBrand) || 1;
     const disc = (Number(v.licenseDiscount) || 0) / 100;
-    const implDays = Number(v.implDays) || 15;
     const implDisc = (Number(v.implDiscount) || 0) / 100;
-    const selected = (v.items as string[]) || [];
-    const tierPrices = JIGSAW_TIER_PRICES[tier] || JIGSAW_TIER_PRICES["1-3"];
     const items: LineItem[] = [];
+    const additionalBranches = Math.max(0, branchesPerBrand - 1);
 
-    for (const itemId of selected) {
-      const tierPrice = tierPrices[itemId];
-      if (tierPrice !== undefined) {
-        const label = JIGSAW_ITEMS.find((i) => i.value === itemId)?.label || itemId;
-        items.push(li(label, locs, tierPrice, disc, "license"));
-      } else {
-        const fixedItem = JIGSAW_ITEMS.find((i) => i.value === itemId);
-        if (fixedItem && fixedItem.price > 0) {
-          items.push(li(fixedItem.label, itemId === "wallet" || itemId === "website" ? 1 : locs, fixedItem.price, disc, "license"));
-        }
-      }
+    if (v.includeApp) {
+      items.push(li("1st Branch – Mobile App (per brand)", brands, 11200, disc, "license"));
     }
+    if (v.includeWeb) {
+      items.push(li("1st Branch – Web App (per brand)", brands, 8400, disc, "license"));
+    }
+    if (additionalBranches > 0) {
+      items.push(li("Additional Branches – Mobile + Web (per brand)", brands * additionalBranches, 4000, disc, "license"));
+    }
+    items.push(li("Implementation (per brand)", brands, 15000, implDisc, "professional-services"));
 
-    items.push(implLine(implDays, implDisc));
-
-    return result(items);
+    return result(items, [
+      "1st branch per brand includes: Mobile App (SAR 11,200/yr) + Web App (SAR 8,400/yr).",
+      "Each additional branch per brand: SAR 4,000/yr (Mobile + Web combined).",
+      "Implementation fees are one-time per brand.",
+    ]);
   },
 };
 
@@ -1164,7 +1119,7 @@ const SHIJI_INTERFACES = [
 const shijiPms: SolutionDef = {
   id: "shiji-pms",
   name: "Shiji PMS",
-  category: "hospitality",
+  category: "instorecx",
   description: "Property management system for hotels",
   solutionType: "PMS",
   inputs: [
@@ -1218,7 +1173,7 @@ const shijiPms: SolutionDef = {
 const zucchetti: SolutionDef = {
   id: "zucchetti",
   name: "Zucchetti",
-  category: "hospitality",
+  category: "instorecx",
   description: "Channel manager and booking engine for hotels",
   solutionType: "Channel Manager & Booking Engine",
   inputs: [
@@ -1282,7 +1237,7 @@ const zucchetti: SolutionDef = {
 const inconcert: SolutionDef = {
   id: "inconcert",
   name: "InConcert",
-  category: "contact-center",
+  category: "instorecx",
   description: "Omnichannel contact center platform",
   solutionType: "Contact Center",
   inputs: [
@@ -1552,7 +1507,7 @@ const DRIVE_THRU_ITEMS = [
 const drivethru: SolutionDef = {
   id: "drive-thru",
   name: "Drive Thru",
-  category: "hardware",
+  category: "instorecx",
   description: "PAR drive-thru communication and timer systems",
   solutionType: "Drive Thru",
   inputs: [
@@ -1587,7 +1542,7 @@ const drivethru: SolutionDef = {
 const infoWebsites: SolutionDef = {
   id: "info-websites",
   name: "Info Websites",
-  category: "websites",
+  category: "digital",
   description: "Professional branded website design and development",
   solutionType: "Websites",
   inputs: [
@@ -1630,6 +1585,358 @@ const jigsawRdn: SolutionDef = {
   },
 };
 
+// ─── Creatio CRM ───────────────────────────────────────────
+const CREATIO_PRODUCTS = [
+  { label: "Sales Creatio", value: "sales", priceUSD: 15 },
+  { label: "Marketing Creatio", value: "marketing", priceUSD: 15 },
+  { label: "Service Creatio", value: "service", priceUSD: 15 },
+];
+
+const creatio: SolutionDef = {
+  id: "creatio",
+  name: "Creatio CRM",
+  category: "data-ai",
+  description: "Composable no-code CRM platform with Sales, Marketing, and Service modules",
+  solutionType: "CRM",
+  inputs: [
+    {
+      id: "plan",
+      label: "Platform Plan",
+      type: "select",
+      options: [
+        { label: "Growth ($25/user/mo)", value: "growth" },
+        { label: "Enterprise ($75/user/mo)", value: "enterprise" },
+      ],
+      defaultValue: "enterprise",
+    },
+    { id: "users", label: "Number of Full Users", type: "number", defaultValue: 25, min: 1, max: 500, suffix: "users" },
+    {
+      id: "products",
+      label: "Composable Products",
+      type: "checkbox-group",
+      options: CREATIO_PRODUCTS.map((p) => ({ label: `${p.label} ($${p.priceUSD}/user/mo)`, value: p.value })),
+      defaultValue: ["sales"],
+    },
+    { id: "licenseDiscount", label: "License Discount (%)", type: "number", defaultValue: 15, min: 0, max: 50, suffix: "%" },
+    { id: "implDays", label: "Implementation Man-Days", type: "number", defaultValue: 21, min: 5, max: 60 },
+    { id: "implDiscount", label: "Implementation Discount (%)", type: "number", defaultValue: 25, min: 0, max: 60, suffix: "%" },
+  ],
+  calculate(v) {
+    const planPrices: Record<string, number> = { growth: 25, enterprise: 75 };
+    const plan = v.plan as string;
+    const users = Number(v.users) || 25;
+    const disc = (Number(v.licenseDiscount) || 0) / 100;
+    const implDays = Number(v.implDays) || 21;
+    const implDisc = (Number(v.implDiscount) || 0) / 100;
+    const items: LineItem[] = [];
+
+    const platformAnnual = (planPrices[plan] || 75) * 12 * SAR_USD_RATE;
+    items.push(li(`Creatio ${plan === "enterprise" ? "Enterprise" : "Growth"} Platform`, users, platformAnnual, disc, "license"));
+
+    const products = (v.products as string[]) || [];
+    for (const pId of products) {
+      const prod = CREATIO_PRODUCTS.find((p) => p.value === pId);
+      if (prod) {
+        const annual = prod.priceUSD * 12 * SAR_USD_RATE;
+        items.push(li(prod.label, users, annual, disc, "license"));
+      }
+    }
+
+    items.push(implLine(implDays, implDisc));
+    return result(items, ["USD prices converted at 3.75 SAR/USD."]);
+  },
+};
+
+// ─── Nomic AI ──────────────────────────────────────────────
+const nomicAi: SolutionDef = {
+  id: "nomic-ai",
+  name: "Nomic AI",
+  category: "data-ai",
+  description: "AI-powered project delivery platform for AEC firms",
+  solutionType: "AI Platform",
+  inputs: [
+    {
+      id: "plan",
+      label: "Plan",
+      type: "select",
+      options: [
+        { label: "Business ($40/user/mo, min 25 seats)", value: "business" },
+        { label: "Enterprise (Custom)", value: "enterprise" },
+      ],
+      defaultValue: "business",
+    },
+    { id: "users", label: "Number of Users", type: "number", defaultValue: 25, min: 25, max: 500, suffix: "users" },
+    { id: "aiUsagePerSeat", label: "AI Usage per Seat ($/mo)", type: "number", defaultValue: 20, min: 0, max: 100, helpText: "Business plan includes $20/seat/mo pooled AI usage" },
+    { id: "licenseDiscount", label: "License Discount (%)", type: "number", defaultValue: 10, min: 0, max: 50, suffix: "%" },
+    { id: "implDays", label: "Implementation Man-Days", type: "number", defaultValue: 15, min: 5, max: 40 },
+    { id: "implDiscount", label: "Implementation Discount (%)", type: "number", defaultValue: 25, min: 0, max: 60, suffix: "%" },
+  ],
+  calculate(v) {
+    const users = Number(v.users) || 25;
+    const disc = (Number(v.licenseDiscount) || 0) / 100;
+    const implDays = Number(v.implDays) || 15;
+    const implDisc = (Number(v.implDiscount) || 0) / 100;
+    const aiUsage = Number(v.aiUsagePerSeat) || 20;
+    const items: LineItem[] = [
+      li("Nomic AI Business License (Annual)", users, 40 * 12 * SAR_USD_RATE, disc, "license"),
+      li("AI Usage Allowance (Annual)", users, aiUsage * 12 * SAR_USD_RATE, disc, "license"),
+    ];
+    items.push(implLine(implDays, implDisc));
+    return result(items, ["USD prices converted at 3.75 SAR/USD. Min 25 seats for Business plan."]);
+  },
+};
+
+// ─── Fundraizerly ──────────────────────────────────────────
+const fundraizerly: SolutionDef = {
+  id: "fundraizerly",
+  name: "Fundraizerly",
+  category: "data-ai",
+  description: "Digital asset tokenization and fundraising platform",
+  solutionType: "Fundraising Platform",
+  inputs: [
+    {
+      id: "tier",
+      label: "Tier",
+      type: "select",
+      options: [
+        { label: "Launch (SAR 37,500/yr)", value: "launch" },
+        { label: "Growth (SAR 52,500/yr)", value: "growth" },
+        { label: "Scale (SAR 103,125/yr)", value: "scale" },
+      ],
+      defaultValue: "growth",
+    },
+    { id: "licenseDiscount", label: "License Discount (%)", type: "number", defaultValue: 0, min: 0, max: 30, suffix: "%" },
+  ],
+  calculate(v) {
+    const tierData: Record<string, { annual: number; setup: number }> = {
+      launch: { annual: 37500, setup: 18750 },
+      growth: { annual: 52500, setup: 18750 },
+      scale: { annual: 103125, setup: 125000 },
+    };
+    const tier = v.tier as string;
+    const data = tierData[tier] || tierData.growth;
+    const disc = (Number(v.licenseDiscount) || 0) / 100;
+    return result([
+      li(`Fundraizerly ${tier} License`, 1, data.annual, disc, "license"),
+      li(`${tier} Setup Fee`, 1, data.setup, 0, "professional-services"),
+    ], ["Enterprise tier available with custom pricing — contact sales."]);
+  },
+};
+
+// ─── Wateen ────────────────────────────────────────────────
+const wateen: SolutionDef = {
+  id: "wateen",
+  name: "Wateen",
+  category: "field-automation",
+  description: "Supply chain and procurement management for F&B",
+  solutionType: "Supply Chain Management",
+  inputs: [
+    {
+      id: "package",
+      label: "Package",
+      type: "select",
+      options: [
+        { label: "Basic (SAR 7,200/location/yr)", value: "basic" },
+        { label: "Professional (SAR 11,000/location/yr)", value: "professional" },
+        { label: "Enterprise (SAR 15,000/location/yr)", value: "enterprise" },
+      ],
+      defaultValue: "professional",
+    },
+    { id: "locations", label: "Number of Locations", type: "number", defaultValue: 10, min: 1, max: 100, suffix: "locations" },
+    { id: "licenseDiscount", label: "License Discount (%)", type: "number", defaultValue: 15, min: 0, max: 50, suffix: "%" },
+    { id: "implDays", label: "Implementation Man-Days", type: "number", defaultValue: 10, min: 5, max: 30 },
+    { id: "implDiscount", label: "Implementation Discount (%)", type: "number", defaultValue: 15, min: 0, max: 60, suffix: "%" },
+  ],
+  calculate(v) {
+    const prices: Record<string, number> = { basic: 7200, professional: 11000, enterprise: 15000 };
+    const pkg = v.package as string;
+    const locs = Number(v.locations) || 10;
+    const disc = (Number(v.licenseDiscount) || 0) / 100;
+    const implDays = Number(v.implDays) || 10;
+    const implDisc = (Number(v.implDiscount) || 0) / 100;
+    return result([
+      li(`Wateen ${pkg} License`, locs, prices[pkg] || 11000, disc, "license"),
+      implLine(implDays, implDisc),
+    ]);
+  },
+};
+
+// ─── Workiom ───────────────────────────────────────────────
+const workiom: SolutionDef = {
+  id: "workiom",
+  name: "Workiom",
+  category: "field-automation",
+  description: "No-code work management and automation platform",
+  solutionType: "Work Management",
+  inputs: [
+    { id: "users", label: "Number of Users", type: "number", defaultValue: 10, min: 1, max: 200, suffix: "users" },
+    { id: "licenseDiscount", label: "License Discount (%)", type: "number", defaultValue: 15, min: 0, max: 50, suffix: "%" },
+    { id: "implDays", label: "Implementation Man-Days", type: "number", defaultValue: 10, min: 5, max: 30 },
+    { id: "implDiscount", label: "Implementation Discount (%)", type: "number", defaultValue: 15, min: 0, max: 60, suffix: "%" },
+  ],
+  calculate(v) {
+    const users = Number(v.users) || 10;
+    const disc = (Number(v.licenseDiscount) || 0) / 100;
+    const implDays = Number(v.implDays) || 10;
+    const implDisc = (Number(v.implDiscount) || 0) / 100;
+    return result([
+      li("Workiom Business License (Annual)", users, 630, disc, "license"),
+      implLine(implDays, implDisc),
+    ]);
+  },
+};
+
+// ─── Repzo ─────────────────────────────────────────────────
+const REPZO_ADDONS = [
+  { label: "CLM Module", value: "clm", price: 420 },
+  { label: "Live Location", value: "live-location", price: 216 },
+];
+
+const repzo: SolutionDef = {
+  id: "repzo",
+  name: "Repzo",
+  category: "field-automation",
+  description: "Field sales force automation and distribution management",
+  solutionType: "Field Sales",
+  inputs: [
+    {
+      id: "userTier",
+      label: "User Tier",
+      type: "select",
+      options: [
+        { label: "1-10 users (SAR 140/user/mo)", value: "1-10" },
+        { label: "11-25 users (SAR 125/user/mo)", value: "11-25" },
+        { label: "26-50 users (SAR 100/user/mo)", value: "26-50" },
+        { label: "51-100 users (SAR 85/user/mo)", value: "51-100" },
+        { label: "101-150 users (SAR 70/user/mo)", value: "101-150" },
+        { label: "151-200 users (SAR 50/user/mo)", value: "151-200" },
+        { label: "200+ users (SAR 35/user/mo)", value: "200+" },
+      ],
+      defaultValue: "11-25",
+    },
+    { id: "users", label: "Number of Users", type: "number", defaultValue: 15, min: 1, max: 500, suffix: "users" },
+    {
+      id: "addons",
+      label: "Add-Ons",
+      type: "checkbox-group",
+      options: REPZO_ADDONS.map((a) => ({ label: `${a.label} (SAR ${a.price}/user/yr)`, value: a.value })),
+      defaultValue: [],
+    },
+    { id: "licenseDiscount", label: "License Discount (%)", type: "number", defaultValue: 0, min: 0, max: 50, suffix: "%" },
+    { id: "implDays", label: "Implementation Man-Days", type: "number", defaultValue: 10, min: 5, max: 20 },
+    { id: "implDiscount", label: "Implementation Discount (%)", type: "number", defaultValue: 50, min: 0, max: 60, suffix: "%" },
+  ],
+  calculate(v) {
+    const tierPrices: Record<string, number> = { "1-10": 1680, "11-25": 1500, "26-50": 1200, "51-100": 1020, "101-150": 840, "151-200": 600, "200+": 420 };
+    const tier = v.userTier as string;
+    const users = Number(v.users) || 15;
+    const disc = (Number(v.licenseDiscount) || 0) / 100;
+    const implDays = Number(v.implDays) || 10;
+    const implDisc = (Number(v.implDiscount) || 0) / 100;
+    const items: LineItem[] = [
+      li("Repzo License (Annual)", users, tierPrices[tier] || 1500, disc, "license"),
+    ];
+    const addons = (v.addons as string[]) || [];
+    for (const aId of addons) {
+      const addon = REPZO_ADDONS.find((a) => a.value === aId);
+      if (addon) items.push(li(addon.label, users, addon.price, disc, "license"));
+    }
+    items.push(implLine(implDays, implDisc));
+    return result(items);
+  },
+};
+
+// ─── CarrotCut ─────────────────────────────────────────────
+const CARROTCUT_ADDONS = [
+  { label: "Strategy Module", value: "strategy", price: 30000 },
+  { label: "KPIs Module", value: "kpis", price: 18750 },
+  { label: "Test Management Module", value: "test-mgmt", price: 7500 },
+];
+
+const carrotcut: SolutionDef = {
+  id: "carrotcut",
+  name: "CarrotCut",
+  category: "field-automation",
+  description: "Work management platform with Workflow, CRM, HelpDesk, and BI modules",
+  solutionType: "Work Management",
+  inputs: [
+    { id: "adminUsers", label: "Admin Users", type: "number", defaultValue: 2, min: 0, max: 100, suffix: "users", helpText: "SAR 2,025/user/yr" },
+    { id: "premiumUsers", label: "Premium Users", type: "number", defaultValue: 5, min: 0, max: 200, suffix: "users", helpText: "SAR 1,575/user/yr" },
+    { id: "standardUsers", label: "Standard Users", type: "number", defaultValue: 10, min: 0, max: 500, suffix: "users", helpText: "SAR 450/user/yr" },
+    { id: "helpdeskUsers", label: "HelpDesk Users", type: "number", defaultValue: 0, min: 0, max: 200, suffix: "users", helpText: "SAR 270/user/yr" },
+    {
+      id: "addons",
+      label: "Add-On Modules",
+      type: "checkbox-group",
+      options: CARROTCUT_ADDONS.map((a) => ({ label: `${a.label} (SAR ${a.price.toLocaleString()}/yr)`, value: a.value })),
+      defaultValue: [],
+    },
+    { id: "licenseDiscount", label: "License Discount (%)", type: "number", defaultValue: 0, min: 0, max: 50, suffix: "%" },
+    { id: "implDays", label: "Implementation Man-Days", type: "number", defaultValue: 10, min: 5, max: 40 },
+    { id: "implDiscount", label: "Implementation Discount (%)", type: "number", defaultValue: 0, min: 0, max: 60, suffix: "%" },
+  ],
+  calculate(v) {
+    const disc = (Number(v.licenseDiscount) || 0) / 100;
+    const implDays = Number(v.implDays) || 10;
+    const implDisc = (Number(v.implDiscount) || 0) / 100;
+    const items: LineItem[] = [];
+
+    const adminUsers = Number(v.adminUsers) || 0;
+    const premiumUsers = Number(v.premiumUsers) || 0;
+    const standardUsers = Number(v.standardUsers) || 0;
+    const helpdeskUsers = Number(v.helpdeskUsers) || 0;
+
+    if (adminUsers > 0) items.push(li("Admin User License", adminUsers, 2025, disc, "license"));
+    if (premiumUsers > 0) items.push(li("Premium User License", premiumUsers, 1575, disc, "license"));
+    if (standardUsers > 0) items.push(li("Standard User License", standardUsers, 450, disc, "license"));
+    if (helpdeskUsers > 0) items.push(li("HelpDesk User License", helpdeskUsers, 270, disc, "license"));
+
+    const addons = (v.addons as string[]) || [];
+    for (const aId of addons) {
+      const addon = CARROTCUT_ADDONS.find((a) => a.value === aId);
+      if (addon) items.push(li(addon.label, 1, addon.price, disc, "license"));
+    }
+
+    items.push(implLine(implDays, implDisc));
+    return result(items, ["Core modules included: Workflow, Task Management, CRM, HelpDesk, DocuApprove, BI, TimeSheet, AI."]);
+  },
+};
+
+// ─── Jigsaw Mobile App ─────────────────────────────────────
+const jigsawMobileApp: SolutionDef = {
+  id: "jigsaw-mobile-app",
+  name: "Jigsaw Mobile App",
+  category: "digital",
+  description: "Mobile and web ordering app with per-brand per-branch pricing",
+  solutionType: "Mobile/Web App",
+  inputs: [
+    { id: "brands", label: "Number of Brands", type: "number", defaultValue: 1, min: 1, max: 20 },
+    { id: "branches", label: "Total Branches (across all brands)", type: "number", defaultValue: 3, min: 1, max: 200, helpText: "1st branch per brand: SAR 19,600/yr. Additional branches: SAR 4,000/yr each." },
+    { id: "licenseDiscount", label: "License Discount (%)", type: "number", defaultValue: 0, min: 0, max: 50, suffix: "%" },
+    { id: "implDiscount", label: "Implementation Discount (%)", type: "number", defaultValue: 0, min: 0, max: 60, suffix: "%" },
+  ],
+  calculate(v) {
+    const brands = Number(v.brands) || 1;
+    const totalBranches = Number(v.branches) || brands;
+    const disc = (Number(v.licenseDiscount) || 0) / 100;
+    const implDisc = (Number(v.implDiscount) || 0) / 100;
+    const additionalBranches = Math.max(0, totalBranches - brands);
+    const items: LineItem[] = [
+      li("1st Branch – Mobile App (per brand)", brands, 11200, disc, "license"),
+      li("1st Branch – Web App (per brand)", brands, 8400, disc, "license"),
+    ];
+    if (additionalBranches > 0) {
+      items.push(li("Additional Branches – Mobile + Web", additionalBranches, 4000, disc, "license"));
+    }
+    items.push(li("Implementation (per brand)", brands, 15000, implDisc, "professional-services"));
+    return result(items, [
+      "1st branch per brand includes: Mobile App (SAR 11,200/yr) + Web App (SAR 8,400/yr).",
+      "Each additional branch: SAR 4,000/yr (Mobile + Web combined).",
+      "All prices exclusive of 15% VAT.",
+    ]);
+  },
+};
+
 // ─── Export All ─────────────────────────────────────────────
 export const ALL_SOLUTIONS: SolutionDef[] = [
   netsuite,
@@ -1638,30 +1945,31 @@ export const ALL_SOLUTIONS: SolutionDef[] = [
   lightspeed,
   tcs,
   dingg,
-  miosalon,
   infrasys,
   como,
   servme,
-  jolt,
   lynnc,
   bayzatHR,
   kayanHR,
   basherHR,
   omniful,
-  unleashed,
   onfleet,
   fiix,
   jigsaw,
-  jigsawRdn,
-  infoWebsites,
   shijiPms,
-  zucchetti,
   inconcert,
   rwConnect,
   rwFatoora,
   rwExtend,
   rwInsight,
   drivethru,
+  creatio,
+  nomicAi,
+  fundraizerly,
+  wateen,
+  workiom,
+  repzo,
+  carrotcut,
 ];
 
 export function getSolution(id: string): SolutionDef | undefined {

@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { ClientInfo } from "@/types";
 
 interface Props {
@@ -26,8 +27,10 @@ const inputClass =
   "w-full rounded-lg border border-border bg-white px-3 py-2 text-sm text-text outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-colors";
 
 export default function ClientInfoForm({ value, onChange }: Props) {
-  const set = (field: keyof ClientInfo, v: string) =>
+  const set = (field: keyof ClientInfo, v: string | number) =>
     onChange({ ...value, [field]: v });
+  const [validityDisplay, setValidityDisplay] = useState(String(value.validityDays));
+  useEffect(() => { setValidityDisplay(String(value.validityDays)); }, [value.validityDays]);
 
   return (
     <div className="wizard-step space-y-6">
@@ -84,17 +87,30 @@ export default function ClientInfoForm({ value, onChange }: Props) {
             type="date"
             className={inputClass}
             value={value.date}
-            onChange={(e) => set("date", e.target.value)}
+            readOnly
           />
         </Field>
 
-        <Field label="Valid Until">
+        <Field label="Validity (Days)">
           <input
-            type="date"
-            className={inputClass}
-            value={value.validUntil}
-            onChange={(e) => set("validUntil", e.target.value)}
+            type="number"
+            className={`${inputClass}${value.validityDays > 60 || value.validityDays < 1 ? " border-red-500 focus:border-red-500 focus:ring-red-500/20" : ""}`}
+            value={validityDisplay}
+            onChange={(e) => {
+              setValidityDisplay(e.target.value);
+              const num = Number(e.target.value);
+              if (!isNaN(num)) set("validityDays", num);
+            }}
+            onBlur={() => setValidityDisplay(String(value.validityDays))}
+            min={1}
+            max={60}
           />
+          {value.validityDays > 60 && (
+            <span className="text-xs text-red-500 mt-1">Maximum validity is 60 days</span>
+          )}
+          {value.validityDays < 1 && (
+            <span className="text-xs text-red-500 mt-1">Minimum validity is 1 day</span>
+          )}
         </Field>
       </div>
 
